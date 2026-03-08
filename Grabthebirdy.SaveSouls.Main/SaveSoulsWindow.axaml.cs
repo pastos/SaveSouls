@@ -81,7 +81,7 @@ namespace Grabthebirdy.SaveSouls.Main
         {
             _trayIcon = new TrayIcon { ToolTipText = "Save Souls", IsVisible = false };
 
-             _trayIcon.Icon = new WindowIcon(LoadAsset("avares://Grabthebirdy.SaveSouls.Main/Assets/bonfire_icon.ico"));
+             _trayIcon.Icon = new WindowIcon(LoadAsset("avares://SaveSouls/Assets/bonfire-icon.ico"));
 
             var menu = new NativeMenu();
 
@@ -146,12 +146,12 @@ namespace Grabthebirdy.SaveSouls.Main
             
             Background = new ImageBrush(LoadAsset(item.Text switch
             {
-                "Dark Souls 2" => "avares://Grabthebirdy.SaveSouls.Main/Assets/dark-souls-1.jpg",
-                "Dark Souls 3" => "avares://Grabthebirdy.SaveSouls.Main/Assets/dark-souls-1.jpg",
-                "Elden Ring"   => "avares://Grabthebirdy.SaveSouls.Main/Assets/dark-souls-1.jpg",
-                "Sekiro"       => "avares://Grabthebirdy.SaveSouls.Main/Assets/sekiro_440x200.jpg",
+                "Dark Souls 2" => "avares://SaveSouls/Assets/dark-souls-2.jpg",
+                "Dark Souls 3" => "avares://SaveSouls/Assets/dark-souls-3.jpg",
+                "Elden Ring"   => "avares://SaveSouls/Assets/elden-ring.jpg",
+                "Sekiro"       => "avares://SaveSouls/Assets/sekiro.jpg",
                 "Dark Souls 1" or
-                _              => "avares://Grabthebirdy.SaveSouls.Main/Assets/dark-souls-1.jpg"
+                _              => "avares://SaveSouls/Assets/dark-souls-1.jpg"
             }))
             {
                 Stretch = Stretch.None,

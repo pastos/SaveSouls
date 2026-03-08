@@ -26,5 +26,11 @@
 
     <ItemGroup>
         <AvaloniaResource Include="Assets/**" />
+        <AvaloniaResource Include="Assets/bonfire-icon.ico" />
+        <AvaloniaResource Include="Assets/dark-souls-1.jpg" />
+        <AvaloniaResource Include="Assets/dark-souls-2.jpg" />
+        <AvaloniaResource Include="Assets/dark-souls-3.jpg" />
+        <AvaloniaResource Include="Assets/elden-ring.jpg" />
+        <AvaloniaResource Include="Assets/sekiro.jpg" />
     </ItemGroup>
 </Project>

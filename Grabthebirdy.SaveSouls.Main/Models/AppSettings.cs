@@ -8,5 +8,6 @@ namespace Grabthebirdy.SaveSouls.Main.Models
         /// Stores the last-used save file path keyed by game name (e.g. "Dark Souls 3").
         /// </summary>
         public Dictionary<string, string> GameSavePaths { get; set; } = new();
+        public string LastSelectedGame { get; set; } = "";
     }
 }

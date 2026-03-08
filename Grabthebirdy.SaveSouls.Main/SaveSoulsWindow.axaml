@@ -8,7 +8,7 @@
         SizeToContent="Height"
         CanResize="False"
         WindowStartupLocation="CenterScreen"
-        Icon="/Assets/bonfire_icon.ico">
+        Icon="/Assets/bonfire-icon.ico">
     <Window.Background>
         <ImageBrush Source="/Assets/dark-souls-1.jpg" Stretch="None" AlignmentY="Top" />
     </Window.Background>
