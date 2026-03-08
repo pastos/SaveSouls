@@ -10,18 +10,33 @@ jobs:
     strategy:
       matrix:
         include:
+          # Self-contained (no .NET required)
           - os: windows-latest
             profile: win-x64
-            artifact: SaveSouls.exe
+            artifact: SaveSouls-win-x64.exe
           - os: ubuntu-latest
             profile: linux-x64
-            artifact: SaveSouls-linux
+            artifact: SaveSouls-linux-x64
           - os: macos-latest
             profile: osx-x64
             artifact: SaveSouls-mac-intel
           - os: macos-latest
             profile: osx-arm64
             artifact: SaveSouls-mac-arm
+
+          # Framework-dependent (requires .NET 10 installed)
+          - os: windows-latest
+            profile: win-x64-fd
+            artifact: SaveSouls-win-x64-requires-dotnet.exe
+          - os: ubuntu-latest
+            profile: linux-x64-fd
+            artifact: SaveSouls-linux-x64-requires-dotnet
+          - os: macos-latest
+            profile: osx-x64-fd
+            artifact: SaveSouls-mac-intel-requires-dotnet
+          - os: macos-latest
+            profile: osx-arm64-fd
+            artifact: SaveSouls-mac-arm-requires-dotnet
 
     runs-on: ${{ matrix.os }}
 
