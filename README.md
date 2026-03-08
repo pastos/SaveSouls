@@ -24,7 +24,7 @@ A save file manager for FromSoftware games. Allows you to quickly save and load 
 1. Launch **SaveSouls** and select your game from the dropdown
 2. The save file path should be detected automatically. If not, click **Pick Souls file** to locate it manually
 3. Launch your game and load into your character
-4. **Before using any hotkeys**, go into the game's menu and exit back to the game. This triggers the game's auto-save, indicated by the **bonfire or flame icon** that appears in the corner of the screen (top-left or top-right depending on the game). Wait for it to disappear before proceeding
+4. **Before using any hotkeys**, go into the character's menu(inventory) while playing but not during a fight. Then go back in the game. This triggers the game's auto-save, indicated by the **bonfire or flame icon** that appears in the corner of the screen (top-left or top-right depending on the game). Wait for it to disappear before proceeding
 5. You can now use **F1–F4** to quick save your current progress into a slot at any time while playing
 
 ### Loading a saved slot
@@ -32,7 +32,7 @@ A save file manager for FromSoftware games. Allows you to quickly save and load 
 Loading works differently from saving and requires going through the main menu:
 
 1. Quit to the main menu from inside the game
-2. When you see the **"Continue"** option on the main menu, press the load hotkey (**F5–F8**) for the slot you want to restore
+2. When you see the **"Continue"** option on the main menu (after all the splash screens), press the load hotkey (**F5–F8**) for the slot you want to restore
 3. Press **"Continue"** — the game will load from exactly where you saved that slot
 
 > **Why the main menu?** The game locks its save file while you are actively playing. Loading a slot while in-game would have no effect. Replacing the save file at the main menu screen, just before hitting Continue, is the correct moment for the game to pick it up.
