@@ -81,7 +81,6 @@ namespace Grabthebirdy.SaveSouls.Main
         {
             _trayIcon = new TrayIcon { ToolTipText = "Save Souls", IsVisible = false };
 
-            // TODO: set Icon once an asset is available:
              _trayIcon.Icon = new WindowIcon(LoadAsset("avares://Grabthebirdy.SaveSouls.Main/Assets/bonfire_icon.ico"));
 
             var menu = new NativeMenu();
@@ -144,8 +143,7 @@ namespace Grabthebirdy.SaveSouls.Main
 
             _selectedGame = item;
             _gameSaveFilename = item.SaveFileName;
-
-            // TODO: swap background image per game once assets are ready.
+            
             Background = new ImageBrush(LoadAsset(item.Text switch
             {
                 "Dark Souls 2" => "avares://Grabthebirdy.SaveSouls.Main/Assets/dark-souls-1.jpg",
