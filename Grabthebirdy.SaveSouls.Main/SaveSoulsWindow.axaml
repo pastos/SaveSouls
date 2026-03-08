@@ -1,0 +1,152 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="Grabthebirdy.SaveSouls.Main.SaveSoulsWindow"
+        Title="Save Souls"
+        Width="440"
+        MinWidth="440"
+        MaxWidth="440"
+        SizeToContent="Height"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen"
+        Icon="/Assets/bonfire_icon.ico"
+        Background="#1a1a1a">
+    <Window.Background>
+        <ImageBrush Source="/Assets/dark-souls-1.jpg" Stretch="None" AlignmentY="Top" />
+    </Window.Background>
+    <Window.Styles>
+        <Style Selector="ScrollBar">
+            <Setter Property="Width" Value="18" />
+            <Setter Property="Background" Value="AntiqueWhite" />
+        </Style>
+        <Style Selector="Button#btnSelectFolder">
+            <Setter Property="Background" Value="#88FFFFFF" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+        <Style Selector="Button#btnSelectFolder:pointerover /template/ ContentPresenter">
+            <Setter Property="Background" Value="#CFFFFFFF" />
+            <Setter Property="Foreground" Value="Black"></Setter>
+            <Setter Property="FontWeight" Value="Bold"></Setter>
+        </Style>
+    </Window.Styles>
+    <!--
+        Background per game: replace the solid Background above with an ImageBrush once assets are ready.
+        Example:
+    -->
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Left column: game selection, path, button, save order -->
+        <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,10,10,0">
+
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
+                <ComboBox x:Name="comboBox1"
+                          SelectionChanged="ComboBox_SelectionChanged"
+                          FontSize="12"
+                          Width="130" />
+
+                <!-- Placeholder for game info icon; replace with Image once asset is ready -->
+
+                <Border Width="16" Height="16"
+                        CornerRadius="8"
+                        Background="SteelBlue"
+                        Margin="8,0,0,0"
+                        VerticalAlignment="Center"
+                        ToolTip.Tip="Pick game. The program will try to find the save file automatically.">
+                    <TextBlock
+                        Text="?"
+                        FontSize="13"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Margin="9,1,0,0"
+                        Width="15" Height="15"
+                        VerticalAlignment="Center" />
+                </Border>
+            </StackPanel>
+
+            <Label Content="Save Folder"
+                   FontSize="12"
+                   Foreground="White" />
+
+            <TextBox x:Name="txtGameSavePath"
+                     Width="280"
+                     MinHeight="0"
+                     Height="28"
+                     Margin="0,0,0,10"
+                     HorizontalAlignment="Left"
+                     FontSize="12"
+                     Watermark="Game Save Path" />
+
+            <Button x:Name="btnSelectFolder"
+                    Click="BtnSelectFolder_Click"
+                    Content="Pick Souls file"
+                    FontSize="12"
+                    Width="100"
+                    Height="30"
+                    ToolTip.Tip="Pick save file"
+                    Margin="180,0,0,10"
+                    Foreground="Black"
+                    HorizontalAlignment="Left" />
+        </StackPanel>
+
+        <!-- Right column: F-key hint list -->
+        <TextBlock Grid.Column="1" Grid.Row="0"
+                   x:Name="label3"
+                   FontWeight="Normal"
+                   Foreground="White"
+                   FontSize="12"
+                   VerticalAlignment="Top"
+                   Margin="0,0,20,10"
+                   xml:space="preserve">
+                                      F1: Quicksave 1
+                                      F2: Quicksave 2
+                                      F3: Quicksave 3
+                                      F4: Quicksave 4
+
+                                      F5: Load Quicksave 1
+                                      F6: Load Quicksave 2
+                                      F7: Load Quicksave 3
+                                      F8: Load Quicksave 4
+        </TextBlock>
+        <!-- Bottom row: log spanning both columns -->
+        <StackPanel Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="2" Orientation="Horizontal">
+            <Label x:Name="lbl_L"
+                   Margin="5,7,0,0"
+                   Content="Latest Save Order:"
+                   FontSize="12"
+                   FontWeight="Regular"
+                   Foreground="White" />
+
+            <Label x:Name="lbl_LatestSave"
+                   Margin="0,7,0,0"
+                   Content="There is no save point"
+                   FontWeight="Regular"
+                   FontSize="12"
+                   Foreground="White" />
+        </StackPanel>
+            <ScrollViewer Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2"
+                          x:Name="rTxtLog"
+                          Margin="0,0,20,0"
+                          Height="116"
+                          HorizontalScrollBarVisibility="Disabled"
+                          VerticalScrollBarVisibility="Visible"
+                          AllowAutoHide="False">
+                <TextBlock x:Name="rTxtLogContent"
+                           TextWrapping="Wrap"
+                           FontSize="12"
+                           Background="AntiqueWhite"
+                           Foreground="Black"
+                           Padding="4,4,0,4" />
+            </ScrollViewer>
+    </Grid>
+</Window>
