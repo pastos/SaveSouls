@@ -9,6 +9,8 @@
         <Company>Grabthebirdy</Company>
         <Product>SaveSouls</Product>
         <AssemblyVersion>1.0.0</AssemblyVersion>
+        <DebugType>none</DebugType>
+        <DebugSymbols>false</DebugSymbols>
     </PropertyGroup>
 
     <ItemGroup>
