@@ -8,8 +8,7 @@
         SizeToContent="Height"
         CanResize="False"
         WindowStartupLocation="CenterScreen"
-        Icon="/Assets/bonfire_icon.ico"
-        Background="#1a1a1a">
+        Icon="/Assets/bonfire_icon.ico">
     <Window.Background>
         <ImageBrush Source="/Assets/dark-souls-1.jpg" Stretch="None" AlignmentY="Top" />
     </Window.Background>
@@ -50,7 +49,7 @@
         <StackPanel Grid.Column="0" Grid.Row="0" Margin="10,10,10,0">
 
             <StackPanel Orientation="Horizontal" Margin="0,0,0,0">
-                <ComboBox x:Name="comboBox1"
+                <ComboBox x:Name="ComboBox1"
                           SelectionChanged="ComboBox_SelectionChanged"
                           FontSize="12"
                           Width="130" />

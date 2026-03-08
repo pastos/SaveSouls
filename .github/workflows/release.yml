@@ -1,0 +1,49 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    strategy:
+      matrix:
+        include:
+          - os: windows-latest
+            profile: win-x64
+            artifact: SaveSouls.exe
+          - os: ubuntu-latest
+            profile: linux-x64
+            artifact: SaveSouls-linux
+          - os: macos-latest
+            profile: osx-x64
+            artifact: SaveSouls-mac-intel
+          - os: macos-latest
+            profile: osx-arm64
+            artifact: SaveSouls-mac-arm
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Publish
+        run: dotnet publish Grabthebirdy.SaveSouls.Main/Grabthebirdy.SaveSouls.Main.csproj
+          /p:PublishProfile=${{ matrix.profile }}
+          -o ./out
+
+      - name: Rename artifact
+        shell: bash
+        run: |
+          cd out
+          find . -maxdepth 1 -type f ! -name "*.pdb" ! -name "*.xml" | head -1 | xargs -I{} mv {} ${{ matrix.artifact }}
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/${{ matrix.artifact }}

@@ -64,8 +64,8 @@ namespace Grabthebirdy.SaveSouls.Main
                 new GameItem { Text = "Sekiro",        FolderName = "Sekiro",       SaveFileName = "S0000.sl2",                           SteamAppId = "814380"  },
             ];
 
-            comboBox1.ItemsSource = items;
-            comboBox1.SelectedIndex = 2;
+            ComboBox1.ItemsSource = items;
+            ComboBox1.SelectedIndex = 2;
         }
 
         private void InitializeKeyboardHooks()
@@ -82,7 +82,7 @@ namespace Grabthebirdy.SaveSouls.Main
             _trayIcon = new TrayIcon { ToolTipText = "Save Souls", IsVisible = false };
 
             // TODO: set Icon once an asset is available:
-            // _trayIcon.Icon = new WindowIcon(/* bitmap */);
+             _trayIcon.Icon = new WindowIcon(LoadAsset("avares://Grabthebirdy.SaveSouls.Main/Assets/bonfire_icon.ico"));
 
             var menu = new NativeMenu();
 
@@ -106,6 +106,7 @@ namespace Grabthebirdy.SaveSouls.Main
 
         public void RestoreFromTray()
         {
+            ShowInTaskbar = true;
             Show();
             WindowState = WindowState.Normal;
             Activate();
@@ -118,6 +119,7 @@ namespace Grabthebirdy.SaveSouls.Main
             base.OnPropertyChanged(change);
             if (change.Property == WindowStateProperty && WindowState == WindowState.Minimized)
             {
+                ShowInTaskbar = false;
                 Hide();
                 if (_trayIcon != null)
                     _trayIcon.IsVisible = true;
@@ -137,7 +139,7 @@ namespace Grabthebirdy.SaveSouls.Main
 
         private void ComboBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
         {
-            if (comboBox1.SelectedItem is not GameItem item)
+            if (ComboBox1.SelectedItem is not GameItem item)
                 return;
 
             _selectedGame = item;
