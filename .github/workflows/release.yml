@@ -5,15 +5,16 @@ on:
     tags:
       - 'v*'
 
+permissions:
+  id-token: write
+  contents: write
+
 jobs:
-  publish:
+  publish-non-windows:
     strategy:
       matrix:
         include:
           # Self-contained (no .NET required)
-          - os: windows-latest
-            profile: win-x64
-            artifact: SaveSouls-win-x64.exe
           - os: ubuntu-latest
             profile: linux-x64
             artifact: SaveSouls-linux-x64
@@ -25,9 +26,6 @@ jobs:
             artifact: SaveSouls-mac-arm
 
           # Framework-dependent (requires .NET 10 installed)
-          - os: windows-latest
-            profile: win-x64-fd
-            artifact: SaveSouls-win-x64-requires-dotnet.exe
           - os: ubuntu-latest
             profile: linux-x64-fd
             artifact: SaveSouls-linux-x64-requires-dotnet
@@ -57,6 +55,62 @@ jobs:
         run: |
           cd out
           find . -maxdepth 1 -type f ! -name "*.pdb" ! -name "*.xml" | head -1 | xargs -I{} mv {} ${{ matrix.artifact }}
+
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: out/${{ matrix.artifact }}
+
+  publish-windows:
+    strategy:
+      matrix:
+        include:
+          - profile: win-x64
+            artifact: SaveSouls-win-x64.exe
+          - profile: win-x64-fd
+            artifact: SaveSouls-win-x64-requires-dotnet.exe
+
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '10.x'
+
+      - name: Publish
+        run: dotnet publish Grabthebirdy.SaveSouls.Main/Grabthebirdy.SaveSouls.Main.csproj
+          /p:PublishProfile=${{ matrix.profile }}
+          -o ./out
+
+      - name: Rename artifact
+        shell: bash
+        run: |
+          cd out
+          find . -maxdepth 1 -type f ! -name "*.pdb" ! -name "*.xml" | head -1 | xargs -I{} mv {} ${{ matrix.artifact }}
+
+      # SignPath code signing for Windows executables
+      # Prerequisites:
+      #   1. Apply at https://signpath.io/for-open-source
+      #   2. Once approved, set these GitHub Actions secrets/variables:
+      #      - Secret: SIGNPATH_API_TOKEN
+      #      - Variable: SIGNPATH_ORGANIZATION_ID
+      #      - Variable: SIGNPATH_SIGNING_POLICY_SLUG
+      #      - Variable: SIGNPATH_PROJECT_SLUG
+      - name: Sign with SignPath
+        if: vars.SIGNPATH_ORGANIZATION_ID != ''
+        uses: signpath/github-action-submit-signing-request@v1
+        with:
+          api-token: ${{ secrets.SIGNPATH_API_TOKEN }}
+          organization-id: ${{ vars.SIGNPATH_ORGANIZATION_ID }}
+          project-slug: ${{ vars.SIGNPATH_PROJECT_SLUG }}
+          signing-policy-slug: ${{ vars.SIGNPATH_SIGNING_POLICY_SLUG }}
+          artifact-configuration-slug: 'initial'
+          input-artifact-path: out/${{ matrix.artifact }}
+          output-artifact-path: out/${{ matrix.artifact }}
+          wait-for-completion: true
+          wait-for-completion-timeout-in-seconds: 600
 
       - name: Upload to GitHub Release
         uses: softprops/action-gh-release@v2
