@@ -43,7 +43,7 @@ namespace Grabthebirdy.SaveSouls.Main
 
         private static QuickSaveLoad[] BuildQuickSaveLoadArray()
         {
-            string baseDir = AppContext.BaseDirectory;
+            string baseDir = Path.GetDirectoryName(Environment.ProcessPath) ?? AppContext.BaseDirectory;
             return
             [
                 new QuickSaveLoad { Number = 1, Folder = Path.Combine(baseDir, "QuickSaveFolder1"), SaveKey = KeyCode.VcF1, LoadKey = KeyCode.VcF5 },

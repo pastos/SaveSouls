@@ -15,3 +15,6 @@ project.lock.json
 # OS
 .DS_Store
 Thumbs.db
+
+# CLAUDE
+CLAUDE.md
