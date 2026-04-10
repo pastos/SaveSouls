@@ -266,7 +266,7 @@ namespace Grabthebirdy.SaveSouls.Main
             string destPath = Path.Combine(slot.Folder, _gameSaveFilename);
             try
             {
-                Directory.CreateDirectory(slot.Folder); 
+                Directory.CreateDirectory(slot.Folder);
                 File.Copy(sourcePath, destPath, overwrite: true);
                 Log($"Game Saved (QuickSave {slot.Number})");
                 ScanForLatestSave();
